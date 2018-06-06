@@ -139,15 +139,19 @@ class Book:
     def delete_name(self,n,priority):
         if self.search_name(n) is not 0:
             self.delete(self.search_name(n)[priority-1])
+            self.length -= 1
     def delete_last_name(self,ln,priority):
         if self.search_last_name(ln) is not 0:
             self.delete(self.search_last_name(ln)[priority-1])
+            self.length -= 1
     def delete_phone(self,ph,priority):
         if self.search_phone(ph) is not 0:
             self.delete(self.search_phone(ph)[priority-1])
+            self.length -= 1
     def delete_email(self,e,priority):
         if self.search_email(e) is not 0:
-            self.delete(self.search_email(e)[priority-1])        
+            self.delete(self.search_email(e)[priority-1])   
+            self.length -= 1     
     def print_book(self):
         if self.empty():
             print("Libreta de contactos vacía.")
