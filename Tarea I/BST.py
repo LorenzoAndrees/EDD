@@ -1,7 +1,9 @@
 import unicodedata
+
 def noacc(word):
     s = ''.join((c for c in unicodedata.normalize('NFD',word) if unicodedata.category(c) != 'Mn'))
     return s
+
 class Contact:
     def __init__(self,n,ln,ph,e):
         self.left = None
@@ -183,35 +185,3 @@ class Book:
             self.print_book(root.left)
             print(root)
             self.print_book(root.right)
-
-if __name__ == "__main__":
-    lorenzo = Contact("Lorenzo","Alfaro","86709403","lorenzo.alfaro@mail.udp.cl")
-    lucia = Contact("Lucia","Marquez","74472555","lucia.marquez@mail.udp.cl")
-    Libreta = Book()
-    Libreta.add(lorenzo)
-    Libreta.add(lucia)
-    Libreta.print_book(Libreta.root)
-    marilens = Contact("Marilena","Bravo","61922535","marilenab06@hotmail.com")
-    print("Añadiendo a marilens")
-    Libreta.add(marilens)
-    Libreta.print_book(Libreta.root)
-    print("Añadiendo Aroldo")
-    aroldo = Contact("Aroldo","Alfaro","61922535","aroldoalfaro@hotmail.com")
-    Libreta.add(aroldo)
-    Libreta.print_book(Libreta.root)
-    lorenzo2 = Contact("Lorenzo","Andrés","86709403","lordandrees@gmail.com")
-    print("Añadiendo Lorenzo2")
-    Libreta.add(lorenzo2)
-    Libreta.print_book(Libreta.root)
-    print("Borrando Aroldo")
-    Libreta.delete_name("Aroldo",Libreta.root,1)
-    Libreta.print_book(Libreta.root)
-    print("Borrando Lorenzo Andres")
-    Libreta.delete_last_name("Andres",Libreta.root,1)
-    Libreta.print_book(Libreta.root)
-    print("Borrando lucia.marquez@mail.udp.cl")
-    Libreta.delete_email("lucia.marquez@mail.udp.cl",Libreta.root,1)
-    Libreta.print_book(Libreta.root)
-    print("Borrando 86709403")
-    Libreta.delete_phone("86709403",Libreta.root,1)
-    Libreta.print_book(Libreta.root)
