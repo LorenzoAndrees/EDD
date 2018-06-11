@@ -21,7 +21,6 @@ class Book:
     def __init__(self):
         self.root = None
         self.heigth = 0
-        self.depth = 0
     def empty(self):
         return self.root == None
     def __add(self,contact,root):
