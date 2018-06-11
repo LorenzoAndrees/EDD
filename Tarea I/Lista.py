@@ -78,16 +78,16 @@ class Book:
         else:
             find = False
             aux = self.head
-            names = []
+            contacts = []
             while aux:
                 if aux.name == n:
                     find = True
-                    names.append(aux)
+                    contacts.append(aux)
                 aux = aux.next
             if find is not True:
                 print("El contacto no se encuentra en la libreta.")
                 return 0
-            return names
+            return contacts
     def search_last_name(self,ln):
         if self.empty():
             print("Su libreta de contactos está vacía.")
@@ -95,16 +95,16 @@ class Book:
         else:
             find = False
             aux = self.head
-            last_names = []
+            contacts = []
             while aux:
                 if aux.last_name == ln:
                     find = True
-                    last_names.append(aux)
+                    contacts.append(aux)
                 aux = aux.next
             if find is not True:
                 print("El contacto no se encuentra en la libreta.")
                 return 0
-            return last_names
+            return contacts
     def search_phone(self,ph):
         if self.empty():
             print("Su libreta de contactos está vacía.")
@@ -112,16 +112,16 @@ class Book:
         else:
             find = False
             aux = self.head
-            phones = []
+            contacts = []
             while aux:
                 if aux.phone == ph:
                     find = True
-                    phones.append(aux)
+                    contacts.append(aux)
                 aux = aux.next
             if find is not True:
                 print("El contacto no se encuentra en la libreta.")
                 return 0
-            return phones
+            return contacts
     def search_email(self,e):
         if self.empty():
             print("Su libreta de contactos está vacía.")
@@ -129,16 +129,16 @@ class Book:
         else:
             find = False
             aux = self.head
-            emails = []
+            contacts = []
             while aux:
                 if aux.email == e:
                     find = True
-                    emails.append(aux)
+                    contacts.append(aux)
                 aux = aux.next
             if find is not True:
                 print("El contacto no se encuentra en la libreta.")
                 return 0
-            return emails
+            return contacts
     def delete(self,node):
         if self.empty():
             print("Libreta de contactos vacia.")
