@@ -1,7 +1,9 @@
 import unicodedata
+
 def noacc(word):
     s = ''.join((c for c in unicodedata.normalize('NFD',word) if unicodedata.category(c) != 'Mn'))
     return s
+    
 class Contact:
     def __init__(self,n,ln,ph,e):
         self.next = None
