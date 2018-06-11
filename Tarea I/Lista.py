@@ -1,10 +1,14 @@
+import unicodedata
+def noacc(word):
+    s = ''.join((c for c in unicodedata.normalize('NFD',word) if unicodedata.category(c) != 'Mn'))
+    return s
 class Contact:
     def __init__(self,n,ln,ph,e):
         self.next = None
         self.prev = None
-        self.name = n
-        self.last_name = ln
-        self.full_name = self.name + " " + self.last_name
+        self.name = noacc(n)
+        self.last_name = noacc(ln)
+        self.full_name = (self.name + " " + self.last_name).title()
         self.phone = ph
         self.email = e
     def __str__(self):
@@ -137,6 +141,7 @@ class Book:
             return emails
     def delete(self,node):
         if self.empty():
+            print("Libreta de contactos vacia.")
             return
         if self.head == node:
             self.head = node.next
