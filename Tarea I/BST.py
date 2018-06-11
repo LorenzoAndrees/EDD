@@ -152,25 +152,25 @@ class Book:
             self.delete_contact(successor)
     def delete_name(self,n,root,priority):
         if self.empty():
-            print("Libre de contactos vacía.")
+            print("Libreta de contactos vacía.")
             return
         self.heigth -= 1
         return self.delete_contact(self.search_name(n,root)[priority-1])
     def delete_last_name(self,ln,root,priority): #Implementar
         if self.empty():
-            print("Libre de contactos vacía.")
+            print("Libreta de contactos vacía.")
             return
         self.heigth -= 1
         return self.delete_contact(self.search_last_name(ln,root)[priority-1])
     def delete_phone(self,ph,root,priority): #Implementar
         if self.empty():
-            print("Libre de contactos vacía.")
+            print("Libreta de contactos vacía.")
             return
         self.heigth -= 1
         return self.delete_contact(self.search_phone(ph,root)[priority-1])
     def delete_email(self,e,root,priority): #Implementar
         if self.empty():
-            print("Libre de contactos vacía.")
+            print("Libreta de contactos vacía.")
             return
         self.heigth -= 1
         return self.delete_contact(self.search_email(e,root)[priority-1])
