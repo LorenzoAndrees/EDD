@@ -84,14 +84,14 @@ class Book:
         if self.empty():
             self.root = contact
         else:
-            if contact.name < (self.root).name:
+            if contact.last_name < (self.root).last_name:
                 self.__add(contact,(self.root).left)
-            elif contact.name > (self.root).name:
+            elif contact.last_name > (self.root).last_name:
                 self.__add(contact,(self.root).right)
-            elif contact.name == (self.root).name:
-                if contact.last_name < (self.root).last_name:
+            elif contact.last_name == (self.root).last_name:
+                if contact.name < (self.root).name:
                     self.__add(contact,(self.root).left)
-                elif contact.last_name > (self.root).last_name:
+                elif contact.name > (self.root).name:
                     self.__add(contact,(self.root).right)"""
     def search_name(self,n,root,contacts=[]):
         if self.empty():
