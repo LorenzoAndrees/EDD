@@ -24,26 +24,26 @@ class Book:
     def empty(self):
         return self.root == None
     def __add(self,contact,root):
-        if contact.name < root.name:
+        if contact.last_name < root.last_name:
             if root.left is None:
                 root.left = contact
                 (root.left).parent = root
             else:
                 self.__add(contact,root.left)
-        elif contact.name > root.name:
+        elif contact.last_name > root.last_name:
             if root.right is None:
                 root.right = contact
                 (root.right).parent = root
             else:
                 self.__add(contact,root.right)
-        elif contact.name == root.name:
-            if contact.last_name < root.last_name:
+        elif contact.last_name == root.last_name:
+            if contact.name < root.name:
                 if root.left is None:
                     root.left = contact
                     (root.left).parent = root
                 else:
                     self.__add(contact,root.left)
-            elif contact.last_name > root.last_name:
+            elif contact.name > root.name:
                 if root.right is None:
                     root.right = contact
                     (root.right).parent = root
