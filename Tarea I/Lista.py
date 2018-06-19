@@ -42,10 +42,10 @@ class Book:
             for i in range(n+1,0,-1):
                 for j in range(0,i+1):
                     if aux.next is not None:
-                        if aux.name > (aux.next).name:
+                        if aux.last_name > (aux.next).last_name:
                             self.swap(aux,aux.next)
-                        elif aux.name == (aux.next).name:
-                            if aux.last_name > (aux.next).last_name:
+                        elif aux.last_name == (aux.next).last_name:
+                            if aux.name > (aux.next).name:
                                 self.swap(aux,aux.next)
                         else:
                             aux = aux.next
