@@ -9,9 +9,9 @@ class Contact:
         self.left = None
         self.right = None
         self.parent = None
-        self.name = noacc(n)
-        self.last_name = noacc(ln)
-        self.full_name = (self.name + " " + self.last_name).title()
+        self.name = (noacc(n)).title()
+        self.last_name = (noacc(ln)).title()
+        self.full_name = self.name + " " + self.last_name
         self.phone = ph
         self.email = e
     def __str__(self):
