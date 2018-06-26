@@ -152,10 +152,12 @@ class Book:
         if node.prev is not None:
             (node.prev).next = node.next 
     def delete_name(self,n,priority):
+        n= (noacc(n)).title()
         if self.search_name(n) is not 0:
             self.delete(self.search_name(n)[priority-1])
             self.length -= 1
     def delete_last_name(self,ln,priority):
+        ln= (noacc(ln)).title()
         if self.search_last_name(ln) is not 0:
             self.delete(self.search_last_name(ln)[priority-1])
             self.length -= 1

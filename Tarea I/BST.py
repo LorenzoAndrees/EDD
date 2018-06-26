@@ -56,6 +56,7 @@ class Book:
             self.__add(contact,self.root)
         self.heigth += 1
     def search_name(self,n,root,contacts=[]):
+        n= (noacc(n)).title()
         if self.empty():
             print("Su libreta de contactos está vacía.")
             return
@@ -68,6 +69,7 @@ class Book:
             self.search_name(n,root.right,contacts)
             return contacts
     def search_last_name(self,ln,root,contacts=[]):
+        ln= (noacc(ln)).title()
         if self.empty():
             print("Su libreta de contactos está vacía.")
             return

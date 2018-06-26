@@ -9,9 +9,9 @@ class Contact:
         self.left = None
         self.right = None
         self.parent = None
-        self.name = noacc(n)
-        self.last_name = noacc(ln)
-        self.full_name = (self.name + " " + self.last_name).title()
+        self.name = (noacc(n)).title()
+        self.last_name = (noacc(ln)).title()
+        self.full_name = self.name + " " + self.last_name
         self.phone = ph
         self.email = e
         self.height = 1
@@ -94,6 +94,7 @@ class Book:
                 elif contact.name > (self.root).name:
                     self.__add(contact,(self.root).right)"""
     def search_name(self,n,root,contacts=[]):
+        n= (noacc(n)).title()
         if self.empty():
             print("Su libreta de contactos está vacía.")
             return
@@ -106,6 +107,7 @@ class Book:
             self.search_name(n,root.right,contacts)
             return contacts
     def search_last_name(self,ln,root,contacts=[]):
+        ln= (noacc(ln)).title()
         if self.empty():
             print("Su libreta de contactos está vacía.")
             return
