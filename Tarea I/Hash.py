@@ -171,4 +171,5 @@ class Book:
     def printbook(self):
         for c in self.list:
             if c is not None:
-                print(c)
+                for x in c:
+                    print(x[1])

@@ -54,13 +54,13 @@ class Book:
                         break
     def add(self,contact):
         if self.empty():
+            print("Añadiendo ",contact.full_name," ...")
             self.head = contact
         else:
             aux = self.head
             name_repeat = False
             repeat = 0
             while aux:
-                print("Añadiendo ",contact.full_name)
                 if aux.name == contact.name and aux.last_name == contact.last_name:
                     name_repeat = True
                     repeat += 1
@@ -69,8 +69,9 @@ class Book:
                     contact.prev = aux
                     break
                 aux = aux.next
+            print("Añadiendo ",contact.full_name, " ...")
             if name_repeat and repeat is not 0:
-                contact.full_name = contact.name + " " + contact.last_name + " (" + str(repeat) + ")"
+                contact.full_name = (contact.name + " " + contact.last_name).title() + " (" + str(repeat) + ")"
         self.length += 1
         self.bubblesort()
     def search_name(self,n):
