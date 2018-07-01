@@ -1,5 +1,4 @@
 import unicodedata
-
 def noacc(word):
     s = ''.join((c for c in unicodedata.normalize('NFD',word) if unicodedata.category(c) != 'Mn'))
     return s
@@ -17,22 +16,23 @@ class Contact:
         self.phone = ph
         self.email = e
     def __str__(self):
-        return str(self.full_name + " ~~~~ " + self.phone + " ~~~~ " + self.email)
+        return str(self.name + " " + self.last_name + " ~~~~ " + self.phone + " ~~~~ " + self.email)
 
 class Book:
     def __init__(self):
-        self.list = [None]*25
+        self.list = [None]*26
     def empty(self):
         return self.list == None
     def put(self,contact):
         key = contact.last_name
         pos = hashstr(key)
+        print("Añadiendo ",contact.name," ",contact.last_name,"...")
         if self.list[pos] is not None:
             self.list[pos].append([key,contact])
         else:
-            self.list[pos] =[]
+            self.list[pos] = []
             self.list[pos].append([key,contact])
-            self.list[pos].sort()
+        self.list[pos].sort(key=lambda x: x[0].x[1])
     def search_name(self,n):
         n= (noacc(n)).title()
         if self.empty():
@@ -168,7 +168,7 @@ class Book:
         if not delete:
             print("No sé encontró el contacto en la libreta.")
         return
-    def printbook(self):
+    def print_book(self):
         for c in self.list:
             if c is not None:
                 for x in c:
