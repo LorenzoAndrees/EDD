@@ -22,45 +22,66 @@ class Book:
         self.length = 0
     def empty(self):
         return self.head == None
-    def swap(self,node1,node2):
-        node1.next = node2.next
-        node2.next = node1
-        node2.prev = node1.prev
-        node1.prev = node2
-        if node2.prev is not None:
-            (node2.prev).next = node2
+    def merge(self, first, second):
+        if first is None:
+            return second 
+        if second is None:
+            return first
+        if first.last_name < second.last_name:
+            first.next = self.merge(first.next, second)
+            first.next.prev = first
+            first.prev = None  
+            return first
         else:
-            self.head = node2
-        if node1.next is not None:
-            (node1.next).prev = node1
-    def bubblesort(self):
-        if self.empty():
-            return
-        else:
-            aux = self.head
-            n = self.length
-            for i in range(n+1,0,-1):
-                for j in range(0,i+1):
-                    if aux.next is not None:
-                        if aux.last_name > (aux.next).last_name:
-                            self.swap(aux,aux.next)
-                        elif aux.last_name == (aux.next).last_name:
-                            if aux.name > (aux.next).name:
-                                self.swap(aux,aux.next)
-                        else:
-                            aux = aux.next
-                    else:
-                        aux = self.head
-                        break
+            second.next = self.merge(first, second.next)
+            second.next.prev = second
+            second.prev = None
+            return second
+    def mergeSort(self,tempHead):
+        if tempHead is None:
+            return tempHead
+        if tempHead.next is None:
+            return tempHead
+        second = self.split(tempHead)
+        tempHead = self.mergeSort(tempHead)
+        second = self.mergeSort(second)
+        return self.merge(tempHead, second)
+    def sort(self):
+        if self.head and self.head.next:
+            i = self.head
+            while i.next:
+                selected = i
+                j = i.next
+                while j:
+                    if j.last_name < selected.last_name:
+                        selected = j
+                    j = j.next
+                if not selected==i:
+                    i, selected = selected,i
+                i = i.next
+    def split(self, tempHead):
+        fast = slow =  tempHead
+        while(True):
+            if fast.next is None:
+                break
+            if fast.next.next is None:
+                break
+            fast = fast.next.next
+            slow = slow.next  
+        temp = slow.next
+        slow.next = None
+        return temp
     def add(self,contact):
+        self.length += 1
         if self.empty():
-            print("Añadiendo ",contact.full_name," ...")
+            print("Añadiendo ",contact.name," ",contact.last_name,"...")
             self.head = contact
         else:
             aux = self.head
             name_repeat = False
             repeat = 0
             while aux:
+                #print("Error")
                 if aux.name == contact.name and aux.last_name == contact.last_name:
                     name_repeat = True
                     repeat += 1
@@ -69,11 +90,11 @@ class Book:
                     contact.prev = aux
                     break
                 aux = aux.next
-            print("Añadiendo ",contact.full_name, " ...")
+            print("Añadiendo ",contact.name," ",contact.last_name, "...")
             if name_repeat and repeat is not 0:
                 contact.full_name = (contact.name + " " + contact.last_name).title() + " (" + str(repeat) + ")"
-        self.length += 1
-        self.bubblesort()
+        self.head = self.mergeSort(self.head)
+           # self.sort()
     def search_name(self,n):
         if self.empty():
             print("Su libreta de contactos está vacía.")
