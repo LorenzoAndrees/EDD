@@ -32,7 +32,7 @@ class Book:
         else:
             self.list[pos] = []
             self.list[pos].append([key,contact])
-        self.list[pos].sort(key=lambda x: x[0].x[1])
+        self.list[pos].sort(key=lambda x: x[0])
     def search_name(self,n):
         n= (noacc(n)).title()
         if self.empty():
