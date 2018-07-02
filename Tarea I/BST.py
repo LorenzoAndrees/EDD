@@ -50,6 +50,7 @@ class Book:
                 else:
                     self.__add(contact,root.right)
     def add(self,contact):
+        print("Agregando a ",contact.full_name,"...")
         if self.empty():
             self.root = contact
         else:
@@ -63,11 +64,11 @@ class Book:
         if root is None:
             pass
         else:
-            self.search_name(n,root.left,contacts)
             if root.name == n:
                 contacts.append(root)
-            self.search_name(n,root.right,contacts)
-            return contacts
+            self.search_last_name(n,root.left,contacts)
+            self.search_last_name(n,root.right,contacts)
+        return contacts
     def search_last_name(self,ln,root,contacts=[]):
         ln= (noacc(ln)).title()
         if self.empty():
@@ -76,11 +77,11 @@ class Book:
         if root is None:
             pass
         else:
-            self.search_last_name(ln,root.left,contacts)
             if root.last_name == ln:
                 contacts.append(root)
+            self.search_last_name(ln,root.left,contacts)
             self.search_last_name(ln,root.right,contacts)
-            return contacts
+        return contacts
     def search_phone(self,ph,root,contacts=[]):
         if self.empty():
             print("Su libreta de contactos está vacía.")
@@ -88,11 +89,11 @@ class Book:
         if root is None:
             pass
         else:
-            self.search_phone(ph,root.left,contacts)
-            if root.phone == ph:
+            if root.name == ph:
                 contacts.append(root)
-            self.search_phone(ph,root.right,contacts)
-            return contacts
+            self.search_last_name(ph,root.left,contacts)
+            self.search_last_name(ph,root.right,contacts)
+        return contacts
     def search_email(self,e,root,contacts=[]):
         if self.empty():
             print("Su libreta de contactos está vacía.")
@@ -100,22 +101,22 @@ class Book:
         if root is None:
             pass
         else:
-            self.search_email(e,root.left,contacts)
-            if root.email == e:
+            if root.name == e:
                 contacts.append(root)
-            self.search_email(e,root.right,contacts)
+            self.search_last_name(e,root.left,contacts)
+            self.search_last_name(e,root.right,contacts)
             return contacts
     def delete_contact(self,contact):
         def min_value_node(n):
             current = n
-            while current.left != None:
+            while current.left:
                 current = current.left
             return current
         def number_children(n):
             number_children = 0
-            if n.left != None:
+            if n.left:
                 number_children += 1
-            if n.right != None:
+            if n.right:
                 number_children += 1
             return number_children
         if contact == self.root:
@@ -135,7 +136,7 @@ class Book:
             else:
                 node_parent.right = None
         if node_children == 1:
-            if contact.left != None:
+            if contact.left:
                 child = contact.left
             else:
                 child = contact.right

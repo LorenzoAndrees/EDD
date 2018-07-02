@@ -62,37 +62,29 @@ class Book:
         if root is None or root.left is None:
             return root
         return self.getMinValueNode(root.left)
-    def add(self,contact,root):
-        if root is None:
-            if self.empty():
-                self.root = contact
+    def add(self, root, contact):
+        if self.root is None:
+            self.root = contact
+            return
+        if not root:
             return contact
         elif contact.last_name < root.last_name:
-            root.left = self.add(contact,root.left)
-        elif contact.last_name > root.last_name:
-            root.right = self.add(contact,root.right)
-        elif contact.last_name == root.last_name:
-            if contact.name < root.name:
-                root.left = self.add(contact,root.left)
-            elif contact.name > root.name:
-                root.right = self.add(contact,root.right)
+            root.left = self.add(root.left,contact)
+        else:
+            root.right = self.add(root.right,contact)
         root.height = 1 + max(self.getHeight(root.left),self.getHeight(root.right))
         balance = self.getBalance(root)
-        self.dobalance(balance,contact,root)
+        if balance > 1 and contact.last_name < root.left.last_name:
+            return self.rightRotate(root)
+        if balance < -1 and contact.last_name > root.right.last_name:
+            return self.leftRotate(root)
+        if balance > 1 and contact.last_name > root.left.last_name:
+            root.left = self.leftRotate(root.left)
+            return self.rightRotate(root)
+        if balance < -1 and contact.last_name < root.right.last_name:
+            root.right = self.rightRotate(root.right)
+            return self.leftRotate(root)
         return root
-    """def add(self,contact):
-        if self.empty():
-            self.root = contact
-        else:
-            if contact.last_name < (self.root).last_name:
-                self.__add(contact,(self.root).left)
-            elif contact.last_name > (self.root).last_name:
-                self.__add(contact,(self.root).right)
-            elif contact.last_name == (self.root).last_name:
-                if contact.name < (self.root).name:
-                    self.__add(contact,(self.root).left)
-                elif contact.name > (self.root).name:
-                    self.__add(contact,(self.root).right)"""
     def search_name(self,n,root,contacts=[]):
         n= (noacc(n)).title()
         if self.empty():
@@ -180,22 +172,22 @@ class Book:
             root.right = self.rightRotate(root.right)
             return self.leftRotate(root)
         return root
-    def delete_name(self,n,priority):
+    def delete_name(self,n,root,priority):
         if self.empty():
             print("Libreta de contactos vacía.")
             return
         return self.delete_contact(self.search_name(n,self.root)[priority-1])
-    def delete_last_name(self,ln,priority): #Implementar
+    def delete_last_name(self,ln,root,priority): #Implementar
         if self.empty():
             print("Libreta de contactos vacía.")
             return
         return self.delete_contact(self.search_last_name(ln,self.root)[priority-1])
-    def delete_phone(self,ph,priority): #Implementar
+    def delete_phone(self,ph,root,priority): #Implementar
         if self.empty():
             print("Libreta de contactos vacía.")
             return
         return self.delete_contact(self.search_phone(ph,self.root)[priority-1])
-    def delete_email(self,e,priority): #Implementar
+    def delete_email(self,e,root,priority): #Implementar
         if self.empty():
             print("Libreta de contactos vacía.")
             return
@@ -210,38 +202,4 @@ class Book:
             self.print_book(root.left)
             print(root)
             self.print_book(root.right)
-if __name__ == "__main__":
-    libreta = Book()
-    lorenzo = Contact("Lorenzo","Alfaro","86709403","lorenzo.alfaro@mail.udp.cl")
-    lucia = Contact("lucía","márquez","74472555","lucia.marquez@mail.udp.cl")
-    marilens = Contact("Marilena","Bravo","51894656","marilenab06@hotmail.com")
-    aroldo = Contact("Aroldo","Alfaro","61922535","aroldoalfaro@hotmail.com")
-    matias = Contact("Matías","Alfaro","156848623","curaozombi@hotmail.com")
-    lorenzo2 = Contact("Lorenzo","Andress","86709403","lordandrees@gmail.com")
-    print("Agregando a Lorenzo")
-    libreta.root = libreta.add(lorenzo,libreta.root)
-    libreta.print_book(libreta.root)
-    print("Agregando a Lucía")
-    libreta.root = libreta.add(lucia,libreta.root)
-    libreta.print_book(libreta.root)
-    print("Agregando a Marilena")
-    libreta.root = libreta.add(marilens,libreta.root)
-    libreta.print_book(libreta.root)
-    print("Agregando a Matías")
-    libreta.root = libreta.add(matias,libreta.root)
-    libreta.print_book(libreta.root)
-    print("Agregando a Lorenzo2")
-    libreta.root = libreta.add(lorenzo2,libreta.root)
-    libreta.print_book(libreta.root)
-    print("Agregando a Aroldo")
-    libreta.root = libreta.add(aroldo,libreta.root)
-    libreta.print_book(libreta.root)
-    opcion = int(input("Desea eliminar por nombre(1) o por teléfono (2) ?"))
-    if opcion == 1:
-        nombre= str(input("Que nombre desea borrar? "))
-        print("Nombres encontrados: ")
-        c = 0
-        for i in libreta.search_name(nombre,libreta.root):
-            print("\n",i)
-        prioridad = int(input)
 
